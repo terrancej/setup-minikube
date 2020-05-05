@@ -22,5 +22,7 @@ jobs:
 ```
 
 
-### Example workflow 2: Build image and deploy to kubernetes on pull request
+### Example workflow 2
+Build image and deploy and access service URL. see in examples folder
+
 
