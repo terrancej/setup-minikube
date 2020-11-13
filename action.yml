@@ -21,6 +21,10 @@ inputs:
     required: false
     description: 'input description here'
     default: "10"
+  use-cache:
+    description: "Use minikube binary from cache"
+    required: false
+    default: 'false'
 runs:
   using: 'node12'
   main: 'dist/index.js'
