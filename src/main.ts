@@ -10,7 +10,7 @@ async function run(): Promise<void> {
     } else {
       await DownloadMinikube(core.getInput('minikube-version'))
     }
-    await StartMinikube()
+    await StartMinikube(core.getInput('kubernetes-version'))
   } catch (error) {
     core.setFailed(error.message)
   }
