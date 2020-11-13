@@ -25,6 +25,10 @@ inputs:
     description: "Use minikube binary from cache"
     required: false
     default: 'false'
+  kubernetes-version:
+    description: "The kubernetes version to run. Defaults to the latest"
+    required: false
+    default: ''
 runs:
   using: 'node12'
   main: 'dist/index.js'
