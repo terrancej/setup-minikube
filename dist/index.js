@@ -1343,9 +1343,15 @@ const core = __importStar(__webpack_require__(470));
 const minikube_1 = __webpack_require__(928);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
+        const binPath = '/home/runner/bin';
         try {
-            yield minikube_1.DownloadMinikube(core.getInput('minikube-version'));
-            yield minikube_1.StartMinikube();
+            if (core.getInput('use-cache') === 'true') {
+                core.addPath(binPath);
+            }
+            else {
+                yield minikube_1.DownloadMinikube(core.getInput('minikube-version'));
+            }
+            yield minikube_1.StartMinikube(core.getInput('kubernetes-version'));
         }
         catch (error) {
             core.setFailed(error.message);
@@ -4719,9 +4725,13 @@ const tc = __importStar(__webpack_require__(533));
 const os = __importStar(__webpack_require__(87));
 const io = __importStar(__webpack_require__(1));
 const path = __importStar(__webpack_require__(622));
-function StartMinikube() {
+function StartMinikube(version) {
     return __awaiter(this, void 0, void 0, function* () {
-        yield exec.exec('minikube', ['start', '--wait=all']);
+        const args = ['start', 'wait=all'];
+        if (version !== '') {
+            args.push(`--kubernetes-version=${version}`);
+        }
+        yield exec.exec('minikube', args);
     });
 }
 exports.StartMinikube = StartMinikube;
